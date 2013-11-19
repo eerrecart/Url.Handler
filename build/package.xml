@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<umbPackage>
+	<files />
+	<info>
+		<package>
+			<name>Cardapio</name>
+			<version>0.0.0</version>
+			<license url="http://www.opensource.org/licenses/mit-license.php">MIT license</license>
+			<url>https://github.com/fcingolani/cardapio</url>
+			<requirements>
+				<major>0</major>
+				<minor>0</minor>
+				<patch>0</patch>
+			</requirements>
+		</package>
+		<author>
+			<name>Federico Cingolani</name>
+			<website>http://fcingolani.com.ar/</website>
+		</author>
+		<readme><![CDATA[]]></readme>
+	</info>
+  <DocumentTypes>
+    <DocumentType>
+      <Info>
+        <Name>Cardapio.MenuItem</Name>
+        <Alias>CardapioMenuItem</Alias>
+        <Icon>category.gif</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description>
+        </Description>
+        <AllowAtRoot>True</AllowAtRoot>
+        <AllowedTemplates />
+        <DefaultTemplate>
+        </DefaultTemplate>
+      </Info>
+      <Structure>
+        <DocumentType>CardapioMenuItem</DocumentType>
+      </Structure>
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Url</Name>
+          <Alias>url</Alias>
+          <Type>22c6f52c-5d41-45b8-845e-c16354cfdd7b</Type>
+          <Definition>a606b208-9c65-429d-8440-3ece25f12c33</Definition>
+          <Tab>
+          </Tab>
+          <Mandatory>False</Mandatory>
+          <Validation>
+          </Validation>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs />
+    </DocumentType>
+  </DocumentTypes>
+  <Macros>
+    <macro>
+      <name>Cardapio.Menu</name>
+      <alias>Cardapio.Menu</alias>
+      <scriptType>
+      </scriptType>
+      <scriptAssembly>
+      </scriptAssembly>
+      <xslt>
+      </xslt>
+      <useInEditor>False</useInEditor>
+      <refreshRate>0</refreshRate>
+      <scriptingFile>~/Views/MacroPartials/Cardapio.Menu.cshtml</scriptingFile>
+      <properties>
+        <property name="name" alias="name" show="True" propertyType="text" />
+      </properties>
+    </macro>
+  </Macros>
+  <DataTypes>
+    <DataType Name="Cardapio.Url" Id="22c6f52c-5d41-45b8-845e-c16354cfdd7b" Definition="a606b208-9c65-429d-8440-3ece25f12c33" DatabaseType="Ntext">
+      <PreValues>
+        <PreValue Id="110" Value="URL|Content" />
+        <PreValue Id="111" Value="Json" />
+        <PreValue Id="112" Value="False" />
+        <PreValue Id="113" Value="True" />
+        <PreValue Id="114" Value="Content" />
+      </PreValues>
+    </DataType>
+  </DataTypes>
+
+</umbPackage>

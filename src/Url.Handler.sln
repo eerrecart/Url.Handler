@@ -1,9 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Url.Handler", "Url.Handler.csproj", "{17C5FBB3-F74A-45F5-ADC8-5A789D59B58A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Url.Handler", "Url.Handler\Url.Handler.csproj", "{17C5FBB3-F74A-45F5-ADC8-5A789D59B58A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Url.Handler.Test", "Url.Handler.Test\Url.Handler.Test.csproj", "{2A6D616D-091B-4AB8-9A56-85125DDF3E04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Url.Handler.Build", "Url.Handler.Build", "{2F6B53B2-4F35-4DEA-AE8F-0957F99FAB50}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\build.msbuild = ..\build\build.msbuild
+		..\build\nuget-api-key.txt = ..\build\nuget-api-key.txt
+		..\build\package.nuspec = ..\build\package.nuspec
+		..\build\readme.txt = ..\build\readme.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F842A66D-2469-40F1-B047-73AC279822DE}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

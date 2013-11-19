@@ -45,7 +45,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Url.Handler.csproj">
+    <ProjectReference Include="..\Url.Handler\Url.Handler.csproj">
       <Project>{17c5fbb3-f74a-45f5-adc8-5a789d59b58a}</Project>
       <Name>Url.Handler</Name>
     </ProjectReference>

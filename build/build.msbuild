@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Package">
+
+	<Import Project="$(MSBuildProjectDirectory)\MSBuildTasks\MSBuild.Community.Tasks.Targets" />
+	<Import Project="$(MSBuildProjectDirectory)\MSBuildTasks\MSBuild.NuGet.Tasks.Targets" />
+
+	<PropertyGroup>
+		<VersionMajor>1</VersionMajor>
+		<VersionMinor>0</VersionMinor>
+		<VersionPatch>0</VersionPatch>
+		<VersionSuffix></VersionSuffix>
+		<FullVersion>$(VersionMajor).$(VersionMinor).$(VersionPatch)$(VersionSuffix)</FullVersion>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<RootDir>$(MSBuildProjectDirectory)\..\src\Url.Handler</RootDir>
+		<OutputDir>$(MSBuildProjectDirectory)\..\dist</OutputDir>
+		<BuildDir>$(MSBuildProjectDirectory)\..\buildbox</BuildDir>
+		<NuGetBuildDir>$(BuildDir)\NuGet</NuGetBuildDir>
+	</PropertyGroup>
+
+	<Target Name="Clean">
+		<MakeDir Directories="$(OutputDir)" />
+		<RemoveDir Directories="$(BuildDir)" Condition="Exists('$(BuildDir)')" />
+		<MakeDir Directories="$(BuildDir)" />
+		<MakeDir Directories="$(NuGetBuildDir)" />
+	</Target>
+
+  <Target Name="UpdateAssemblyInfo" DependsOnTargets="Clean">
+    <Version Major="$(VersionMajor)" Minor="$(VersionMinor)" BuildType="Automatic" RevisionType="Automatic" StartDate="01/09/2013">
+      <Output TaskParameter="Build" PropertyName="Build" />
+      <Output TaskParameter="Revision" PropertyName="Revision" />
+    </Version>
+    <AssemblyInfo CodeLanguage="CS"
+        OutputFile="$(RootDir)\Properties\VersionInfo.cs"
+        AssemblyVersion="$(VersionMajor).$(VersionMinor).$(VersionPatch)"
+        AssemblyFileVersion="$(VersionMajor).$(VersionMinor).$(Build).$(Revision)"
+        AssemblyInformationalVersion="$(FullVersion)"/>
+  </Target>
+
+	<Target Name="Compile" DependsOnTargets="UpdateAssemblyInfo">
+		<MSBuild Projects="$(RootDir)\..\Url.Handler.sln" Properties="Configuration=Release" />
+	</Target>
+
+	<Target Name="PrepareFiles" DependsOnTargets="Compile">
+		<ItemGroup>
+			<BinFiles Include="$(RootDir)\obj\Release\Url.Handler.dll" />
+			<DebugFiles Include="$(RootDir)\obj\Release\Url.Handler.pdb" />
+			<ViewFiles Include="$(RootDir)\Views\**\*.*" />
+			<PackageFile Include="$(MSBuildProjectDirectory)\package.xml" />
+			<NuSpecFile Include="$(MSBuildProjectDirectory)\package.nuspec" />
+		</ItemGroup>
+	</Target>
+  
+	<Target Name="PrepareNuGetFiles" DependsOnTargets="PrepareFiles">
+		<Copy SourceFiles="@(BinFiles)" DestinationFolder="$(NuGetBuildDir)\lib\net40" />
+		<Copy SourceFiles="@(DebugFiles)" DestinationFolder="$(NuGetBuildDir)\lib\net40" Condition="'$(VersionSuffix)' != ''" />
+		<Copy SourceFiles="@(ViewFiles)" DestinationFiles="@(ViewFiles->'$(NuGetBuildDir)\content\Views\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(NuSpecFile)" DestinationFolder="$(NuGetBuildDir)" />
+	</Target>
+
+	<Target Name="UpdateNuGetManifest" DependsOnTargets="PrepareNuGetFiles">
+		<ItemGroup>
+			<ManifestFiles Include="$(NuGetBuildDir)\**\*" Exclude="$(NuGetBuildDir)\package.nuspec" />
+		</ItemGroup>
+		<MSBuild.NuGet.Tasks.ManifestUpdate
+			ManifestFile="$(NuGetBuildDir)\package.nuspec"
+			WorkingDirectory="$(NuGetBuildDir)"
+			Version="$(VersionMajor).$(VersionMinor).$(VersionPatch)$(VersionSuffix)"
+			Files="@(ManifestFiles)" />
+	</Target>
+  
+	<Target Name="CreateNuGetPackage" DependsOnTargets="UpdateNuGetManifest">
+    <ItemGroup>
+      <ManifestFiles Include="$(NuGetBuildDir)\**\*" Exclude="$(BuildNuGetDir)\package.nuspec" />
+    </ItemGroup>
+		<MSBuild.NuGet.Tasks.Pack NuGetExePath="$(RootDir)\..\packages\NuGet.CommandLine.2.7.3\tools\NuGet.exe"
+			ManifestFile="$(NuGetBuildDir)\package.nuspec"
+			BasePath="$(NuGetBuildDir)"
+			OutputDirectory="$(OutputDir)"
+			Verbosity="normal" />
+		<RemoveDir Directories="$(NuGetBuildDir)" Condition="Exists('$(NuGetBuildDir)')" />
+	</Target>
+
+	<Target Name="Package" DependsOnTargets="CreateNuGetPackage">
+		<Delete Files="$(RootDir)\..\Url.Handler.sln.cache" />
+    <RemoveDir Directories="$(BuildDir)" Condition="Exists('$(BuildDir)')" />
+	</Target>
+  
+  <Target Name="Publish">
+    <Exec WorkingDirectory="$(OutputDir)" Command="$(RootDir)\..\packages\NuGet.CommandLine.2.7.3\tools\NuGet.exe push &quot;Url.Handler.$(FullVersion).nupkg&quot; $([System.IO.File]::ReadAllText(nuget-api-key.txt))" />
+  </Target>
+</Project>

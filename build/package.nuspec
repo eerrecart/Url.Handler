@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+	<metadata>
+		<id>Url.Handler</id>
+		<version>0.0.0</version>
+		<title>Url.Handler</title>
+		<authors>Elias Errecart</authors>
+		<licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+		<projectUrl>https://github.com/curiosoelbicho/Url.Handler</projectUrl>
+		<requireLicenseAcceptance>true</requireLicenseAcceptance>
+		<summary></summary>
+		<description>
+			<![CDATA[Url handler library]]>
+		</description>
+		<tags>url, parse url, relative url</tags>
+	</metadata>
+  <files>
+    <file src="**" target="" />
+  </files>
+</package>
