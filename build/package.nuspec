@@ -8,11 +8,15 @@
 		<licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
 		<projectUrl>https://github.com/curiosoelbicho/Url.Handler</projectUrl>
 		<requireLicenseAcceptance>true</requireLicenseAcceptance>
-		<summary></summary>
+		<summary>
+      <![CDATA[Url handler library for .net
+      This component works using filters to modify the original url provided, so in order to get this working you will need
+      identify whats filters do you need.]]>
+    </summary>
 		<description>
 			<![CDATA[Url handler library]]>
 		</description>
-		<tags>url, parse url, relative url</tags>
+		<tags>url, parse url, relative url, string modification</tags>
 	</metadata>
   <files>
     <file src="**" target="" />
