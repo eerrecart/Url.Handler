@@ -95,20 +95,20 @@ namespace Url.Handler
                 try
                 {
                     
-                    var start = FiltersToApply.First();
+                    if (BeforeStart != null)
+                        BeforeStart(FiltersToApply.First(), this);
 
-                    BeforeStart(start, this);
-                    BeforeFilterApply(start, this);
+                    OuputUrl = Url;
 
-                    OuputUrl = start(Url, this);
-
-                    AfterFilterApply(start, this);
-
-                    foreach (Filter f in FiltersToApply.Skip(1))
+                    foreach (Filter f in FiltersToApply)
                     {
-                        BeforeFilterApply(f, this);
+                        if (BeforeFilterApply != null)
+                            BeforeFilterApply(f, this);
+
                         OuputUrl = f(OuputUrl, this);
-                        AfterFilterApply(f, this);
+
+                        if (AfterFilterApply != null)
+                            AfterFilterApply(f, this);
 
                         ix_filter++;
                     }
