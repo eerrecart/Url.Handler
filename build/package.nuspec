@@ -6,13 +6,11 @@
 		<title>Url.Handler</title>
 		<authors>Elias Errecart</authors>
 		<licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
-		<projectUrl>https://github.com/curiosoelbicho/Url.Handler</projectUrl>
+		<projectUrl>https://github.com/eerrecart/Url.Handler</projectUrl>
 		<requireLicenseAcceptance>true</requireLicenseAcceptance>
 		<summary>
-      <![CDATA[Url handler library for .net
-      This component works using filters to modify the original url provided, so in order to get this working you will need
-      identify whats filters do you need.]]>
-    </summary>
+      			<![CDATA[Url handler library for .net. This component works using filters to modify the original url provided, so in order to get this working you will need identify whats filters do you need.]]>
+    		</summary>
 		<description>
 			<![CDATA[Url handler library]]>
 		</description>
