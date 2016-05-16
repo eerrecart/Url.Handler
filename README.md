@@ -3,8 +3,7 @@ Url.Handler
 
 Url handler library for .net
 
-This component works using filters to modify the original url provided, so in order to get this working you will need
-identify whats filters do you need.
+This component works using filters to modify the original url.
 
 ### Quick start
 ```csharp
@@ -22,14 +21,14 @@ urlHandler.AddFilter(delegate(string _url, Resolve holder) {
     return uri.ToString().Replace(uri.Host, host);
 });
 
-//get te URL after executing all the filters (in this case just one): http://mycdnbucket/assets/media/image.jpg
+//get te URL after executing all filters (in this case just one): http://mycdnbucket/assets/media/image.jpg
 var resultUrl = urlHandler.ApplyFilters();
 ```
 ### Aditional configuration
 There are three events related to the execution flow.
 
 #### BeforeStart
-Event that occurs before all the process begins.
+Occurs before all the process begins.
 ```csharp
 Resolve urlHandler = new Resolve("/assets/media/image.jpg");
 
@@ -41,7 +40,7 @@ static void handler_BeforeStart(Filter currentFilter, Resolve myArgs)
 }
 ```
 #### BeforeFilterApply
-Event that occurs before every filter is executed.
+Occurs before each filter is executed.
 ```csharp
 Resolve urlHandler = new Resolve("/assets/media/image.jpg");
 
@@ -53,7 +52,7 @@ static void handler_BeforeFilterApply(Filter currentFilter, Resolve myArgs)
 }
 ```
 #### AfterFilterApply
-Event that occurs after every filter is executed, the base class executes a validation input string to check if is relative or absolute url.
+Occurs after each filter is executed, the base class run a validation input string to check if is relative or absolute url.
 ```csharp
 Resolve urlHandler = new Resolve("/assets/media/image.jpg");
 
